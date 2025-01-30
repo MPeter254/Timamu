@@ -9,24 +9,24 @@ import {
 } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 
-const Login = ({ navigation }) => {
-  const { login } = useContext(AuthContext);
+const Register = ({ navigation }) => {
+  const { register } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    if (email === "user@example.com" && password === "password123") {
-      login({ email }); // Mock user login
-      Alert.alert("Success", "You are now logged in!");
+  const handleRegister = () => {
+    if (email && password) {
+      register({ email }); // Mock user registration
+      Alert.alert("Success", "Registration successful!");
       navigation.navigate("Profile");
     } else {
-      Alert.alert("Error", "Invalid email or password");
+      Alert.alert("Error", "Please fill in all fields");
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Register</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -41,14 +41,8 @@ const Login = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Register")}
-        style={styles.link}
-      >
-        <Text>Don't have an account? Register here</Text>
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
+        <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );
@@ -74,7 +68,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   button: {
-    backgroundColor: "#4A90E2",
+    backgroundColor: "#50C878",
     padding: 10,
     borderRadius: 5,
     width: "100%",
@@ -84,9 +78,6 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 16,
   },
-  link: {
-    marginTop: 15,
-  },
 });
 
-export default Login;
+export default Register;
